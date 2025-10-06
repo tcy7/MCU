@@ -27,6 +27,7 @@ oled\mpu6050.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 oled\mpu6050.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 oled\mpu6050.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 oled\mpu6050.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+oled\mpu6050.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 oled\mpu6050.o: ..\MyCode\mpu6050.h
 oled\mpu6050.o: ..\MyCode\IIC.h
 oled\mpu6050.o: E:\tools\Keil5\ARM\ARMCC\Bin\..\include\inttypes.h

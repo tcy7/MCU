@@ -28,8 +28,10 @@ oled\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 oled\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 oled\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 oled\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+oled\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 oled\main.o: ../Core/Inc/i2c.h
 oled\main.o: ../Core/Inc/tim.h
+oled\main.o: ../Core/Inc/usart.h
 oled\main.o: ../Core/Inc/gpio.h
 oled\main.o: ../Core/Inc/oled.h
 oled\main.o: ../MyCode/IIC.h

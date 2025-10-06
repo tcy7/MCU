@@ -41,7 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+uint8_t rx_buf[2];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -222,7 +222,9 @@ void USART3_IRQHandler(void)
   /* USER CODE END USART3_IRQn 0 */
   HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_IRQn 1 */
-
+	HAL_UART_Transmit(&huart3,rx_buf,1,1000);
+	
+	HAL_UART_Receive_IT(&huart3,rx_buf,1);
   /* USER CODE END USART3_IRQn 1 */
 }
 

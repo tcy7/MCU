@@ -32,6 +32,7 @@ oled\inv_mpu_dmp_motion_driver.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_
 oled\inv_mpu_dmp_motion_driver.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 oled\inv_mpu_dmp_motion_driver.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 oled\inv_mpu_dmp_motion_driver.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+oled\inv_mpu_dmp_motion_driver.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 oled\inv_mpu_dmp_motion_driver.o: ..\MyCode\inv_mpu_dmp_motion_driver.h
 oled\inv_mpu_dmp_motion_driver.o: ..\MyCode\dmpKey.h
 oled\inv_mpu_dmp_motion_driver.o: ..\MyCode\dmpmap.h

@@ -27,5 +27,6 @@ oled\iic.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 oled\iic.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 oled\iic.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 oled\iic.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+oled\iic.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 oled\iic.o: ..\MyCode\IIC.h
 oled\iic.o: E:\tools\Keil5\ARM\ARMCC\Bin\..\include\inttypes.h

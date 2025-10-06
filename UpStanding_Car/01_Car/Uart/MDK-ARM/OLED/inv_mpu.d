@@ -32,6 +32,7 @@ oled\inv_mpu.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 oled\inv_mpu.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 oled\inv_mpu.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 oled\inv_mpu.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+oled\inv_mpu.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 oled\inv_mpu.o: ..\MyCode\inv_mpu_dmp_motion_driver.h
 oled\inv_mpu.o: ..\MyCode\mpu6050.h
 oled\inv_mpu.o: ..\MyCode\IIC.h

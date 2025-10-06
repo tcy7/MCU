@@ -59,6 +59,8 @@ uint8_t display_buf[20];
 uint32_t sys_tick;
 extern float distance;
 int Encoder_Left,Encoder_Right;
+extern uint8_t rx_buf[2];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,8 +120,9 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
 	HAL_TIM_Encoder_Start(&htim2,TIM_CHANNEL_ALL);
 	HAL_TIM_Encoder_Start(&htim4,TIM_CHANNEL_ALL);
+	HAL_UART_Receive_IT(&huart3,rx_buf,1);
 	Load(-1000,1000);
-	
+	HAL_UART_Transmit(&huart3,"Hello World!\r\n",13,1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -127,10 +130,15 @@ int main(void)
   while (1)
   {
 		Read();
-		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Left);
-		OLED_ShowString(0,4,display_buf,16);
-		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Right);
-		OLED_ShowString(0,6,display_buf,16);
+//		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Left);
+//		OLED_ShowString(0,4,display_buf,16);
+//		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Right);
+//		OLED_ShowString(0,6,display_buf,16);
+		
+		mpu_dmp_get_data(&pitch,&roll,&yaw);
+		sprintf((char *)display_buf,"roll:%.2f   ",roll);
+		OLED_ShowString(0,2,display_buf,16);
+		HAL_UART_Transmit(&huart3,display_buf,sizeof(display_buf),1000);
 //		HAL_Delay(100);
 //		mpu_dmp_get_data(&pitch,&roll,&yaw);
 //		sprintf((char *)display_buf,"roll:%.2f   ",roll);
