@@ -116,7 +116,7 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);
 	HAL_TIM_Encoder_Start(&htim2,TIM_CHANNEL_ALL);
 	HAL_TIM_Encoder_Start(&htim4,TIM_CHANNEL_ALL);
-	Load(-1000,1000);
+	Load(0,0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,7 +126,7 @@ int main(void)
 		Read();
 		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Left);
 		OLED_ShowString(0,4,display_buf,16);
-		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Right);
+		sprintf((char *)display_buf,"Encoder_R:%d   ",Encoder_Right);
 		OLED_ShowString(0,6,display_buf,16);
 //		HAL_Delay(100);
 //		mpu_dmp_get_data(&pitch,&roll,&yaw);

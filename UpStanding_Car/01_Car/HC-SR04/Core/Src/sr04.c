@@ -33,6 +33,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	{
 		HAL_TIM_Base_Stop(&htim3);
 		count=__HAL_TIM_GetCounter(&htim3);
-		distance=count/1000000*340*100/2.0;
+//		distance=count/1000000*340*100/2.0;
+		distance=count*0.017;
+
 	}
 }
