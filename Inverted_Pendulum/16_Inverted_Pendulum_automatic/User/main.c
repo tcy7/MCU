@@ -265,6 +265,7 @@ void TIM1_UP_IRQHandler(void)
 				if(Count1>=5){
 					Count1=0;
 					
+					
 					AnglePID.Actual = Angle;
 					PID_Update(&AnglePID);
 					Motor_SetPWM(AnglePID.Out);
