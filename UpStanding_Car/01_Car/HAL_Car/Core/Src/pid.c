@@ -5,35 +5,46 @@
 #include "mpu6050.h"
 #include "motor.h"
 
+extern uint8_t Fore,Back,Left,Right;
+extern float distance;
+#define SPEED_Y 12
+#define SPEED_Z 100
+
 //传感器数据变量
 int Encoder_Left,Encoder_Right;
 float pitch,roll,yaw;//姿态角
-short gyrox,gyroy,gyroz;//原始数据角速度
+short gyrox,gyroy,gyroz;//原始数据角速度,short类型可以产生正负号
 short	aacx,aacy,aacz;//原始数据角加速度
 
 //闭环控制中间变量
 int Velocity_out,Vertical_out,Turn_out,
 	Target_Speed,Target_turn,MOTO1,MOTO2;
-float Med_Angle=3;
+float Med_Angle=-1.95;
 
-//调参
-/*temp输出给电机7200~-7200，角度值几十度算Kp，gyrox角速度值最快到两三千算Kd*/
-float Vertical_Kp,Vertical_Kd;		//Kp:0~1000、Kd:0~10
-/*temp输出给角度环0~60，两个编码器相加满速约160算Kp,对于速度环根据工程经验一般Kp=200Ki*/
-float Velocity_Kp,Velocity_Ki;		//Kp:0~1,Ki:
-float Turn_Kp,Turn_Kd;
+
+/*
+	1.temp输出给电机7200~-7200，角度值几十度算Kp，gyrox角速度值最快到两三千算Kd
+	2.测极性
+	3.调到恰好高频震荡再乘0.6
+*/
+float Vertical_Kp=-130,Vertical_Kd=-0.9;		//Kp:0~1000、Kd:0~10
+/*temp输出给角度环0~60，两个编码器相加满速约160算Kp,对于速度环一般Kp=200Ki*/
+float Velocity_Kp=-1.2,Velocity_Ki=-0.006;		//Kp:0~1,Ki:0~1
+/**/
+float Turn_Kp=10,Turn_Kd=0.1;
+
 uint8_t stop;
 
 
 extern TIM_HandleTypeDef htim2,htim4;
 
-
+	
 //角度环（直立环）PD控制（内环）保证小车不倒
 //输入：期望角度、真实角度、陀螺仪角速度（位置求导）
-int Vertical(float Med,float Angle,float gyro_Y)
+int Vertical(float Med,float Angle,float gyro_X)
 {
 	int temp;
-	temp=Vertical_Kp*(Angle-Med)+Vertical_Kd*gyro_Y;//真实值减去期望值
+	temp=Vertical_Kp*(Angle-Med)+Vertical_Kd*gyro_X;//真实值减去期望值
 	return temp;
 }
 
@@ -69,7 +80,7 @@ int Turn(float gyro_Z,int Target_turn)
 	return temp;
 }
 
-void Control(void) //每10ms调用一次
+void Control(void) //每10ms调用一次,通过外部中断触发
 {
 	int PWM_out;
 	//读取编码器和陀螺仪的数据
@@ -78,6 +89,34 @@ void Control(void) //每10ms调用一次
 	mpu_dmp_get_data(&pitch,&roll,&yaw);
 	MPU_Get_Gyroscope(&gyrox,&gyroy,&gyroz);
 	MPU_Get_Accelerometer(&aacx,&aacy,&aacz);
+	//前后遥控
+	if((Fore==0)&&(Back==0))Target_Speed=0;
+	if(Fore==1)
+	{
+		if(distance<50)
+			Target_Speed++;
+		else
+			Target_Speed--;
+	}
+	if(Back==1)
+	{
+		Target_Speed++;
+	}
+	Target_Speed=Target_Speed>SPEED_Y?SPEED_Y:(Target_Speed<-SPEED_Y?(-SPEED_Y):Target_Speed);
+	//左右遥控
+	if((Left==0)&&((Right==0)))Target_turn=0;
+	if(Left==1)
+	{
+		Target_turn+=30;
+	}
+	if(Right==1)
+	{
+		Target_turn-=30;
+	}
+	Target_turn=Target_turn>SPEED_Z?SPEED_Z:(Target_turn<-SPEED_Z?(-SPEED_Z):Target_turn);
+	//转向约束
+	if((Fore==0)&&(Back==0))Turn_Kd=0.6;
+	else if((Left==1)||(Right==1))Turn_Kd=0;
 	
 	//将数据写入PID控制器，计算出左右电机的转速值
 	Velocity_out=Velocity(Target_Speed,Encoder_Left,Encoder_Right);

@@ -42,7 +42,7 @@ void Load(int moto1,int moto2)			//-7200~7200
 void Limit(int *motoA,int *motoB)
 {
 	if(*motoA>PWM_MAX)*motoA=PWM_MAX;
-	if(*motoA>PWM_MIN)*motoA=PWM_MIN;
+	if(*motoA<PWM_MIN)*motoA=PWM_MIN;
 	if(*motoB>PWM_MAX)*motoB=PWM_MAX;
-	if(*motoB>PWM_MIN)*motoB=PWM_MIN;
+	if(*motoB<PWM_MIN)*motoB=PWM_MIN;
 }

@@ -41,7 +41,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-uint8_t rx_buf[2];
+uint8_t rx_buf[2],BL_data;
+uint8_t Fore,Back,Left,Right;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -236,8 +237,31 @@ void USART3_IRQHandler(void)
   /* USER CODE END USART3_IRQn 0 */
   HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_IRQn 1 */
-	HAL_UART_Transmit(&huart3,rx_buf,1,1000);
-	
+	BL_data=rx_buf[0];
+	if(BL_data==0x00)
+	{
+		Fore=0,Back=0,Left=0,Right=0;
+	}
+	else if(BL_data==0x01)
+	{
+		Fore=1,Back=0,Left=0,Right=0;
+	}
+	else if(BL_data==0x05)
+	{
+		Fore=0,Back=1,Left=0,Right=0;
+	}
+	else if(BL_data==0x03)
+	{
+		Fore=0,Back=0,Left=0,Right=1;
+	}
+	else if(BL_data==0x07)
+	{
+		Fore=0,Back=0,Left=1,Right=0;
+	}
+	else
+	{
+		Fore=0,Back=0,Left=0,Right=0;
+	}
 	HAL_UART_Receive_IT(&huart3,rx_buf,1);
   /* USER CODE END USART3_IRQn 1 */
 }

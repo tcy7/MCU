@@ -62,8 +62,6 @@ uint32_t sys_tick;
 extern float distance;
 extern uint8_t rx_buf[2];
 
-extern int Encoder_Left,Encoder_Right;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,6 +127,7 @@ int main(void)
 	HAL_TIM_Encoder_Start(&htim4,TIM_CHANNEL_ALL);
 	HAL_UART_Receive_IT(&huart3,rx_buf,1);
 	Load(0,0);
+	OLED_Clear();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -144,7 +143,7 @@ int main(void)
 		sprintf((char *)display_buf,"Encoder_L:%d   ",Encoder_Left);
 		OLED_ShowString(0,0,display_buf,16);
 		sprintf((char *)display_buf,"Encoder_R:%d   ",Encoder_Right);
-		OLED_ShowString(0,2,display_buf,16);		
+		OLED_ShowString(0,2,display_buf,16);
 		sprintf((char *)display_buf,"roll:%.1f   ",roll);
 		OLED_ShowString(0,4,display_buf,16);
 		GET_Distance();

@@ -30,3 +30,4 @@ oled\sr04.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 oled\sr04.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 oled\sr04.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 oled\sr04.o: ../Core/Inc/pid.h
+oled\sr04.o: ../Core/Inc/motor.h

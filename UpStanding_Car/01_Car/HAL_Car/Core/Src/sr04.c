@@ -1,5 +1,6 @@
 #include "sr04.h"
 #include "pid.h"
+#include "motor.h"
 
 uint16_t count;
 float distance;
@@ -41,4 +42,5 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 	if(GPIO_Pin==GPIO_PIN_5)
 		Control();
+//	Load(7200,-7200);
 }
