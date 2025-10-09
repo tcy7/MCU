@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"i2c1_1\startup_stm32f103xb.o"
+"i2c1_1\main.o"
+"i2c1_1\gpio.o"
+"i2c1_1\i2c.o"
+"i2c1_1\stm32f1xx_it.o"
+"i2c1_1\stm32f1xx_hal_msp.o"
+"i2c1_1\stm32f1xx_hal_gpio_ex.o"
+"i2c1_1\stm32f1xx_hal_i2c.o"
+"i2c1_1\stm32f1xx_hal.o"
+"i2c1_1\stm32f1xx_hal_rcc.o"
+"i2c1_1\stm32f1xx_hal_rcc_ex.o"
+"i2c1_1\stm32f1xx_hal_gpio.o"
+"i2c1_1\stm32f1xx_hal_dma.o"
+"i2c1_1\stm32f1xx_hal_cortex.o"
+"i2c1_1\stm32f1xx_hal_pwr.o"
+"i2c1_1\stm32f1xx_hal_flash.o"
+"i2c1_1\stm32f1xx_hal_flash_ex.o"
+"i2c1_1\stm32f1xx_hal_exti.o"
+"i2c1_1\system_stm32f1xx.o"
+--strict --scatter "I2C1_1\I2C1_1.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "I2C1_1.map" -o I2C1_1\I2C1_1.axf
