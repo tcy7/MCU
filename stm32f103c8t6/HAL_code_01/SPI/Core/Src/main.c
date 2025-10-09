@@ -50,8 +50,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void SaveLEDState(uint8_t ledState);
-uint8_t LoadLEDState(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -79,7 +78,6 @@ void SaveLEDState(uint8_t ledState)
 	HAL_SPI_Transmit(&hspi1,writeEnableCmd,1,HAL_MAX_DELAY);
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
 
-	HAL_Delay(100);
 	//2.扇区擦除
 	uint8_t sectorErase[]={0x20,0x00,0x00,0x00,};
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
